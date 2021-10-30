@@ -10,10 +10,10 @@ contract Asset {
     }
 
     mapping(uint => Property) public Properties;
-    // Store Candidates Count
+    // Store property Count
     uint public propertyCount;
 
-    // voted event
+    // boughtEvent event
     event boughtEvent (
         uint indexed _propertyId
     );
@@ -31,13 +31,13 @@ contract Asset {
     }
 
     function buy (uint _propertyId) public {
-        // require that they haven't voted before
+        // require that they dont already own the property before
         require(msg.sender!=Properties[_propertyId].owner);
 
-        // update candidate vote Count
+        // update owner of property
         Properties[_propertyId].owner= msg.sender ;
 
-        // trigger voted event
+        // trigger bought event
         emit boughtEvent(_propertyId);
     }
 }
